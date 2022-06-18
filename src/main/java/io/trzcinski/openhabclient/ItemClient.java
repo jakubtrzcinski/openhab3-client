@@ -5,6 +5,7 @@ import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import io.trzcinski.openhabclient.dto.Item;
+import io.trzcinski.openhabclient.dto.ItemCreate;
 
 import java.util.List;
 
@@ -22,10 +23,13 @@ public interface ItemClient {
     @RequestLine("POST /rest/items/{id}")
     @Headers("Content-Type: text/plain")
     @Body("{state}")
-    void setState(@Param("id") String id,@Param("state")  String state);
+    void setState(@Param("id") String id, @Param("state")  String state);
 
     default String getState(@Param("id") String id) {
         return get(id).getState();
     }
 
+    @RequestLine("PUT /rest/items/{name}")
+    @Headers("Content-Type: application/json")
+    void create(@Param("name") String name, ItemCreate create);
 }

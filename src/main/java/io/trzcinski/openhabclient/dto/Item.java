@@ -12,7 +12,7 @@ import java.util.List;
  */
 @RequiredArgsConstructor
 @Getter
-public class Item{
+public class Item {
     public final String link;
     public final String state;
     public final StateDescription stateDescription;

@@ -2,6 +2,7 @@ package io.trzcinski.openhabclient;
 
 import feign.Feign;
 import feign.gson.GsonDecoder;
+import feign.gson.GsonEncoder;
 import lombok.RequiredArgsConstructor;
 
 import java.nio.charset.StandardCharsets;
@@ -40,6 +41,7 @@ public class OpenhabClientImpl implements OpenhabClient {
     private<T> T createClient(Class<T> clazz) {
         return Feign.builder()
                 .decoder(new GsonDecoder())
+                .encoder(new GsonEncoder())
                 .requestInterceptor(requestTemplate -> requestTemplate.header("Authorization", authHeader))
                 .target(clazz, url);
     }
